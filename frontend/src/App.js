@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { Router, Route, Switch } from 'react-router';
 import logo from './logo.svg';
 import './App.css';
-import { Button } from 'reactstrap';
+import { Container, Row, Col, Button} from 'reactstrap';
+
 
 class App extends Component {
   render() {
