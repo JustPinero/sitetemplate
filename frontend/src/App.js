@@ -6,6 +6,9 @@ import { Container, Row, Col, Button} from 'reactstrap';
 
 
 class App extends Component {
+  construct(props) {
+    super(props);
+  }
   render() {
     return (
       <div className="App">
