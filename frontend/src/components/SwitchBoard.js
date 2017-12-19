@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 import App from '../App';
+import Home from './Home';
 
 export default class Switchboard extends React.Component{
   constructor(props){
@@ -9,6 +10,23 @@ export default class Switchboard extends React.Component{
     };
   }
   componentDidMount(){
+    /*
+      Use this section for testing various states,
+      while there is no admin panel and while state only
+      persists in memory
+    */
+    let mockState = {
+      displayTestPage: false,
+    }
+    axios.post('http://localhost:8081/', mockState)
+    .then(console.log)
+    .then(console.error);
+    /*
+    /END TEST SECTION
+
+    WARNING YOU MAY HAVE TO REFRESH PAGE FOR NEW STATE TO SHOW
+    SINCE THE CALL TO GET STATE IS RIGHT AFTER THIS
+    */
     axios.get('http://localhost:8081/')
     .then((response)=>{
       console.log("I am working here is my state butt burger", response.data);
@@ -16,9 +34,26 @@ export default class Switchboard extends React.Component{
     })
     .catch(err=>console.log(err));
   }
-  render(){
-    return(
-      <App/>
-    );
+
+  SwitchRender() {
+    let page;
+    if (this.props.location.pathname == '/') {
+      page = (<Home/>);
+    }
+
+    if (this.state.displayTestPage == true) {
+      page = (<App/>);
+    }
+
+    return (
+      <div>
+      {page}
+      </div>
+    )
+
+  }
+
+  render() {
+    return this.SwitchRender();
   }
 }

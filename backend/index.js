@@ -38,16 +38,12 @@ app.use(helmet());
 app.get('/', (req, res) => res.status(200).send(state.get()));
 app.get('/:key', (req,res)=> res.status(200).send(state.get(req.params.key)));
 app.post('/', (req, res) => {
-  state = req.body;
+  state = new dotpath(req.body);
   res.status(200).send(state.get());
 });
-// ajax.get('/blog.post/askdalsdkaskdajsdk')
-app.get('/:key/:value', (req, res) => {
-  // state[req.params.key] = req.params.value;
-  state.set(req.params.key, req.params.value);
+app.post('/:key', (req, res) => {
+  state.set(req.params.key, req.body);
   res.status(200).send(state.get());
 });
-
-
 
 app.listen(8081, () => console.log('Example app listening on port 8081!'));
