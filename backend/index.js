@@ -27,7 +27,7 @@ app.use(cookieSession({
 
   // Cookie Options
   maxAge: 2 * 24 * 60 * 60 * 1000 // 2 days
-}))
+}));
 
 app.use(bodyParser());
 
@@ -35,8 +35,8 @@ app.use(cors());
 app.use(helmet());
 
 
-app.get('/', (req, res) => res.status(200).send(state));
-
+app.get('/', (req, res) => res.status(200).send(state.get()));
+app.get('/:key', (req,res)=> res.status(200).send(state.get(req.params.key)));
 app.post('/', (req, res) => {
   state = req.body;
   res.status(200).send(state.get());
@@ -46,8 +46,8 @@ app.get('/:key/:value', (req, res) => {
   // state[req.params.key] = req.params.value;
   state.set(req.params.key, req.params.value);
   res.status(200).send(state.get());
-})
+});
 
 
 
-app.listen(8081, () => console.log('Example app listening on port 3002!'));
+app.listen(8081, () => console.log('Example app listening on port 8081!'));

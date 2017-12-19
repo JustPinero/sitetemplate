@@ -6,7 +6,7 @@ import { Container, Row, Col, Button} from 'reactstrap';
 
 
 class App extends Component {
-  construct(props) {
+  constructor(props) {
     super(props);
   }
   render() {
