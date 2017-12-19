@@ -2,6 +2,7 @@ import axios from 'axios';
 import React from 'react';
 import App from '../App';
 import Home from './Home';
+import Contact from './Contact';
 
 export default class Switchboard extends React.Component{
   constructor(props){
@@ -17,7 +18,7 @@ export default class Switchboard extends React.Component{
     */
     let mockState = {
       displayTestPage: false,
-    }
+    };
     axios.post('http://localhost:8081/', mockState)
     .then(console.log)
     .then(console.error);
@@ -37,8 +38,12 @@ export default class Switchboard extends React.Component{
 
   SwitchRender() {
     let page;
-    if (this.props.location.pathname == '/') {
+    let location = this.props.location.pathname;
+    if (location == '/') {
       page = (<Home/>);
+    }
+    if(location == '/contactus'){
+      page= (<Contact/>);
     }
 
     if (this.state.displayTestPage == true) {
@@ -49,7 +54,7 @@ export default class Switchboard extends React.Component{
       <div>
       {page}
       </div>
-    )
+    );
 
   }
 
